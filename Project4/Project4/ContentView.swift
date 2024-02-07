@@ -32,12 +32,13 @@ struct ContentView: View {
                         }
                     }
                 }
-            }.navigationTitle(rootWord)
-                .onSubmit(addNewWord)
-                .onAppear(perform: startGame)
-                .alert(errorTitle, isPresented: $showingError) {
-                    Button("OK") { }
-                }
+            }
+            .navigationTitle(rootWord)
+            .onSubmit(addNewWord)
+            .onAppear(perform: startGame)
+            .alert(errorTitle, isPresented: $showingError) { } message: {
+                Text(errorMessage)
+            }
         }
     }
     
@@ -51,12 +52,12 @@ struct ContentView: View {
         }
         
         guard isPossible(word: answer) else {
-            wordError(title: "Word is not Possible", message: "you can't spell that word from '\(rootWord)' !")
+            wordError(title: "Word is not Possible", message: "you can't spell that word from '\(rootWord)'!")
             return
         }
         
         guard isReal(word: answer) else {
-            wordError(title: "Word not r", message: "You can't just make them up.")
+            wordError(title: "Word not recognised", message: "You can't just make them up.")
             return
         }
         
